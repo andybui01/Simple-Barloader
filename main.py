@@ -25,29 +25,86 @@ def main():
     return
 
 PLATES = {
-    'RED':25.0,
-    'BLU':20.0,
-    'YLW':15.0,
-    'GRN':10.0,
-    'WHT':5.0,
-    'mRED':2.5,
-    'mBLU':2.0,
-    'mYEL':1.5,
-    'mGRN':1.0,
-    'mWHT':0.5
-}
-
-COLOURS = {
-    'RED': (255,0,0),
-    'BLU': (0,0,255),
-    'YLW': (255,255,0),
-    'GRN': (124,252,0),
-    'WHT': (255,255,255),
-    'mRED':(255,0,0),
-    'mBLU':(0,0,255),
-    'mYEL':(255,255,0),
-    'mGRN':(124,252,0),
-    'mWHT':(255,255,255)
+    'RED':{
+        'weight':25.0,
+        'rgb':(255,0,0),
+        'position':{
+            'start':55,
+            'width':13,
+            'height':90
+        }},
+    'BLU':{
+        'weight':20.0,
+        'rgb':(0,0,255),
+        'position':{
+            'start':55,
+            'width':11,
+            'height':90
+        }},
+    'YLW':{
+        'weight':15.0,
+        'rgb':(255,255,0),
+        'position':{
+            'start':55,
+            'width':9,
+            'height':90
+        }},
+    'GRN':{
+        'weight':10.0,
+        'rgb':(124,252,0),
+        'position':{
+            'start':55,
+            'width':7,
+            'height':90
+        }},
+    'WHT':{
+        'weight':5.0,
+        'rgb':(255,255,255),
+        'position':{
+            'start':77,
+            'width':5,
+            'height':46
+        }},
+    'mRED':{
+        'weight':2.5,
+        'rgb':(255,0,0),
+        'position':{
+            'start':79,
+            'width':4,
+            'height':42
+        }},
+    'mBLU':{
+        'weight':2.0,
+        'rgb':(0,0,255),
+        'position':{
+            'start':81,
+            'width':4,
+            'height':38
+        }},
+    'mYEL':{
+        'weight':1.5,
+        'rgb':(255,255,0),
+        'position':{
+            'start':83,
+            'width':4,
+            'height':34
+        }},
+    'mGRN':{
+        'weight':1.0,
+        'rgb':(124,252,0),
+        'position':{
+            'start':84,
+            'width':4,
+            'height':32
+        }},
+    'mWHT':{
+        'weight':0.5,
+        'rgb':(255,255,255),
+        'position':{
+            'start':86,
+            'width':3,
+            'height':28
+        }}
 }
 
 def barload(weight, isMale):
@@ -78,8 +135,8 @@ def barload(weight, isMale):
 
     while loaded != 0:
         for colour in PLATES:
-            if loaded >= PLATES[colour]:
-                loaded -= PLATES[colour]
+            if loaded >= PLATES[colour]['weight']:
+                loaded -= PLATES[colour]['weight']
                 setup[colour] += 1
                 break
     
@@ -104,8 +161,8 @@ def generate(weight, isMale):
         x = 50
         for colour in setup:
             for i in range(setup[colour]):
-                pygame.draw.rect(screen, COLOURS[colour], (x,50,10,100))
-                x+=15
+                pygame.draw.rect(screen, PLATES[colour]['rgb'], (x,PLATES[colour]['position']['start'],PLATES[colour]['position']['width'],PLATES[colour]['position']['height']))
+                x+=PLATES[colour]['position']['width']+3
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:

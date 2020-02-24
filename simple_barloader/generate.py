@@ -120,6 +120,9 @@ def barload(weight, isMale):
     else:
         loaded = 10.0
 
+    if weight < loaded:
+        raise ValueError
+
     loaded = weight - loaded
 
     while loaded != 0:

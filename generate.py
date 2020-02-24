@@ -130,9 +130,13 @@ def barload(weight, isMale):
     return setup
 
 
-def generate(weight, isMale, file_path):
+def generate(weight, isMale, **kwargs):
     ''' Generate image for barloading '''
 
+    if len(kwargs) > 0:
+        file_path = kwargs['file_path']
+    else:
+        file_path = ''
     file_name = file_path
 
     setup = barload(weight,isMale)

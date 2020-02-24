@@ -98,10 +98,14 @@ def generate(weight, isMale):
 
     pygame.display.flip()
 
+   
     running = True
     while running:
-
-        pygame.draw.rect(screen, white, (50,50,50,50))
+        x = 50
+        for colour in setup:
+            for i in range(setup[colour]):
+                pygame.draw.rect(screen, COLOURS[colour], (x,50,10,100))
+                x+=15
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -110,5 +114,3 @@ def generate(weight, isMale):
         pygame.display.update()
     return
 
-
-main()

@@ -130,8 +130,10 @@ def barload(weight, isMale):
     return setup
 
 
-def generate(weight, isMale):
+def generate(weight, isMale, file_path):
     ''' Generate image for barloading '''
+
+    file_name = file_path
 
     setup = barload(weight,isMale)
 
@@ -164,8 +166,8 @@ def generate(weight, isMale):
             x+=PLATES[colour]['POSITION']['WIDTH']+3
 
     
-    if isMale: file_name="M"
-    else: file_name="F"
+    if isMale: file_name+="M"
+    else: file_name+="F"
     file_name+= str(weight)
     file_name+=".jpeg"
 

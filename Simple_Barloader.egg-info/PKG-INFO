@@ -1,0 +1,16 @@
+Metadata-Version: 2.1
+Name: Simple-Barloader
+Version: 1.0
+Summary: Bar loading graphic generator
+Home-page: https://github.com/andybui01/Simple-Barloader/
+Author: Andy Bui
+Author-email: andy.bui2001@gmail.com
+License: UNKNOWN
+Description: # Simple-Barloader
+        Generate bar loading graphic for weightlifting meets.
+        
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Description-Content-Type: text/markdown

@@ -1,7 +1,11 @@
 README.md
-Simple-Barloader
 setup.py
+simple_barloader
 Simple_Barloader.egg-info/PKG-INFO
 Simple_Barloader.egg-info/SOURCES.txt
 Simple_Barloader.egg-info/dependency_links.txt
 Simple_Barloader.egg-info/top_level.txt
+simple_barloader.egg-info/PKG-INFO
+simple_barloader.egg-info/SOURCES.txt
+simple_barloader.egg-info/dependency_links.txt
+simple_barloader.egg-info/top_level.txt

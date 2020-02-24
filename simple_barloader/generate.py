@@ -137,7 +137,6 @@ def generate(weight, isMale, **kwargs):
         file_path = kwargs['file_path']
     else:
         file_path = ''
-    file_name = file_path
 
     setup = barload(weight,isMale)
 
@@ -169,12 +168,12 @@ def generate(weight, isMale, **kwargs):
             pygame.draw.rect(screen, PLATES[colour]['RGB'], (x,PLATES[colour]['POSITION']['START'],PLATES[colour]['POSITION']['WIDTH'],PLATES[colour]['POSITION']['HEIGHT']))
             x+=PLATES[colour]['POSITION']['WIDTH']+3
 
-    
+    file_name=''
     if isMale: file_name+="M"
     else: file_name+="F"
     file_name+= str(weight)
     file_name+=".jpeg"
 
-    pygame.image.save(screen, file_name)
+    pygame.image.save(screen, file_path+file_name)
 
-    return
+    return file_name

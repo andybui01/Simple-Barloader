@@ -3,94 +3,94 @@ import pygame
 ''' PLATES INFO'''
 PLATES = {
     'RED':{
-        'weight':25.0,
-        'rgb':(255,0,0),
-        'position':{
-            'start':55,
-            'width':13,
-            'height':90
+        'WEIGHT':25.0,
+        'RGB':(255,0,0),
+        'POSITION':{
+            'START':55,
+            'WIDTH':13,
+            'HEIGHT':90
         }},
     'BLU':{
-        'weight':20.0,
-        'rgb':(0,0,255),
-        'position':{
-            'start':55,
-            'width':11,
-            'height':90
+        'WEIGHT':20.0,
+        'RGB':(0,0,255),
+        'POSITION':{
+            'START':55,
+            'WIDTH':11,
+            'HEIGHT':90
         }},
     'YLW':{
-        'weight':15.0,
-        'rgb':(255,255,0),
-        'position':{
-            'start':55,
-            'width':9,
-            'height':90
+        'WEIGHT':15.0,
+        'RGB':(255,255,0),
+        'POSITION':{
+            'START':55,
+            'WIDTH':9,
+            'HEIGHT':90
         }},
     'GRN':{
-        'weight':10.0,
-        'rgb':(124,252,0),
-        'position':{
-            'start':55,
-            'width':7,
-            'height':90
+        'WEIGHT':10.0,
+        'RGB':(124,252,0),
+        'POSITION':{
+            'START':55,
+            'WIDTH':7,
+            'HEIGHT':90
         }},
     'WHT':{
-        'weight':5.0,
-        'rgb':(255,255,255),
-        'position':{
-            'start':77,
-            'width':5,
-            'height':46
+        'WEIGHT':5.0,
+        'RGB':(255,255,255),
+        'POSITION':{
+            'START':77,
+            'WIDTH':5,
+            'HEIGHT':46
         }},
     'mRED':{
-        'weight':2.5,
-        'rgb':(255,0,0),
-        'position':{
-            'start':79,
-            'width':4,
-            'height':42
+        'WEIGHT':2.5,
+        'RGB':(255,0,0),
+        'POSITION':{
+            'START':79,
+            'WIDTH':4,
+            'HEIGHT':42
         }},
     'mBLU':{
-        'weight':2.0,
-        'rgb':(0,0,255),
-        'position':{
-            'start':81,
-            'width':4,
-            'height':38
+        'WEIGHT':2.0,
+        'RGB':(0,0,255),
+        'POSITION':{
+            'START':81,
+            'WIDTH':4,
+            'HEIGHT':38
         }},
     'mYEL':{
-        'weight':1.5,
-        'rgb':(255,255,0),
-        'position':{
-            'start':83,
-            'width':4,
-            'height':34
+        'WEIGHT':1.5,
+        'RGB':(255,255,0),
+        'POSITION':{
+            'START':83,
+            'WIDTH':4,
+            'HEIGHT':34
         }},
     'mGRN':{
-        'weight':1.0,
-        'rgb':(124,252,0),
-        'position':{
-            'start':84,
-            'width':4,
-            'height':32
+        'WEIGHT':1.0,
+        'RGB':(124,252,0),
+        'POSITION':{
+            'START':84,
+            'WIDTH':4,
+            'HEIGHT':32
         }},
     'mWHT':{
-        'weight':0.5,
-        'rgb':(255,255,255),
-        'position':{
-            'start':86,
-            'width':3,
-            'height':28
+        'WEIGHT':0.5,
+        'RGB':(255,255,255),
+        'POSITION':{
+            'START':86,
+            'WIDTH':3,
+            'HEIGHT':28
         }}
 }
 ''' COLLAR INFO '''
 COLLAR = {
-    'weight':2.5,
-    'rgb':(128,128,128),
-    'position':{
-        'start':82,
-        'width':8,
-        'height':36
+    'WEIGHT':2.5,
+    'RGB':(128,128,128),
+    'POSITION':{
+        'START':82,
+        'WIDTH':8,
+        'HEIGHT':36
 }}
 
 
@@ -122,8 +122,8 @@ def barload(weight, isMale):
 
     while loaded != 0:
         for colour in PLATES:
-            if loaded >= PLATES[colour]['weight']:
-                loaded -= PLATES[colour]['weight']
+            if loaded >= PLATES[colour]['WEIGHT']:
+                loaded -= PLATES[colour]['WEIGHT']
                 setup[colour] += 1
                 break
     
@@ -136,8 +136,8 @@ def generate(weight, isMale):
     setup = barload(weight,isMale)
 
     black = (0,0,0)
-
     (width, height) = (200, 200)
+
     screen = pygame.Surface((width, height))
     screen.fill(black)
 
@@ -150,18 +150,25 @@ def generate(weight, isMale):
     # Render separation piece
     pygame.draw.rect(screen, (220,220,220), (44, 93, 6, 14))
 
-    # Render outer sleeve
-    # pygame.draw.rect(screen, (128,128,128), (50, 95, 83, 10))
-
+    # Render plates + collar
     for colour in setup:
+
+        # Draw collar before drawing red microplate
         if colour == "mRED":
-            pygame.draw.rect(screen,COLLAR['rgb'], (x, COLLAR['position']['start'], COLLAR['position']['width'], COLLAR['position']['height']))
-            x+=COLLAR['position']['width']+3
+            pygame.draw.rect(screen,COLLAR['RGB'], (x, COLLAR['POSITION']['START'], COLLAR['POSITION']['WIDTH'], COLLAR['POSITION']['HEIGHT']))
+            x+=COLLAR['POSITION']['WIDTH']+3
 
+        # Draw plate, repeat if necessary
         for i in range(setup[colour]):
-            pygame.draw.rect(screen, PLATES[colour]['rgb'], (x,PLATES[colour]['position']['start'],PLATES[colour]['position']['width'],PLATES[colour]['position']['height']))
-            x+=PLATES[colour]['position']['width']+3
+            pygame.draw.rect(screen, PLATES[colour]['RGB'], (x,PLATES[colour]['POSITION']['START'],PLATES[colour]['POSITION']['WIDTH'],PLATES[colour]['POSITION']['HEIGHT']))
+            x+=PLATES[colour]['POSITION']['WIDTH']+3
 
-    pygame.image.save(screen, "M"+str(weight)+".jpeg")
+    
+    if isMale: file_name="M"
+    else: file_name="F"
+    file_name+= str(weight)
+    file_name+=".jpeg"
+
+    pygame.image.save(screen, file_name)
 
     return

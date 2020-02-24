@@ -1,29 +1,6 @@
 import pygame
 
-
-def main():
-    black = (0,0,0)
-    white = (255,255,255)
-
-    (width, height) = (200, 200)
-    screen = pygame.display.set_mode((width, height))
-    screen.fill(black)
-
-    pygame.display.flip()
-
-    running = True
-    while running:
-
-        pygame.draw.rect(screen, white, (50,50,10,100))
-
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                running = False
-        
-        pygame.display.update()
-
-    return
-
+''' PLATES INFO'''
 PLATES = {
     'RED':{
         'weight':25.0,
@@ -106,7 +83,7 @@ PLATES = {
             'height':28
         }}
 }
-
+''' COLLAR INFO '''
 COLLAR = {
     'weight':2.5,
     'rgb':(128,128,128),
@@ -115,6 +92,29 @@ COLLAR = {
         'width':8,
         'height':36
 }}
+
+def main():
+    black = (0,0,0)
+    white = (255,255,255)
+
+    (width, height) = (200, 200)
+    screen = pygame.display.set_mode((width, height))
+    screen.fill(black)
+
+    pygame.display.flip()
+
+    running = True
+    while running:
+
+        pygame.draw.rect(screen, white, (50,50,10,100))
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                running = False
+        
+        pygame.display.update()
+
+    return
 
 def barload(weight, isMale):
     ''' Take arguments weight and isMale (True for Men's, False for Women's bar) '''
@@ -151,36 +151,33 @@ def barload(weight, isMale):
     
     return setup
 
+
 def generate(weight, isMale):
+    ''' Generate image for barloading '''
 
     setup = barload(weight,isMale)
 
     black = (0,0,0)
-    white = (255,255,255)
+    white = (249,249,249)
 
     (width, height) = (200, 200)
-    screen = pygame.display.set_mode((width, height))
+    screen = pygame.Surface((width, height))
     screen.fill(black)
 
-    pygame.display.flip()
+    # Starting x position
+    x = 50
 
-   
-    running = True
-    while running:
-        x = 50
-        for colour in setup:
-            if colour == "mRED":
-                pygame.draw.rect(screen,COLLAR['rgb'], (x, COLLAR['position']['start'], COLLAR['position']['width'], COLLAR['position']['height']))
-                x+=COLLAR['position']['width']+3
+    for colour in setup:
+        if colour == "mRED":
+            pygame.draw.rect(screen,COLLAR['rgb'], (x, COLLAR['position']['start'], COLLAR['position']['width'], COLLAR['position']['height']))
+            x+=COLLAR['position']['width']+3
 
-            for i in range(setup[colour]):
-                pygame.draw.rect(screen, PLATES[colour]['rgb'], (x,PLATES[colour]['position']['start'],PLATES[colour]['position']['width'],PLATES[colour]['position']['height']))
-                x+=PLATES[colour]['position']['width']+3
+        for i in range(setup[colour]):
+            pygame.draw.rect(screen, PLATES[colour]['rgb'], (x,PLATES[colour]['position']['start'],PLATES[colour]['position']['width'],PLATES[colour]['position']['height']))
+            x+=PLATES[colour]['position']['width']+3
 
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                running = False
-        
-        pygame.display.update()
+    pygame.image.save(screen, "M"+str(weight)+".jpeg")
+
     return
 
+generate(95,True)

@@ -107,6 +107,15 @@ PLATES = {
         }}
 }
 
+COLLAR = {
+    'weight':2.5,
+    'rgb':(128,128,128),
+    'position':{
+        'start':82,
+        'width':8,
+        'height':36
+}}
+
 def barload(weight, isMale):
     ''' Take arguments weight and isMale (True for Men's, False for Women's bar) '''
 
@@ -160,6 +169,10 @@ def generate(weight, isMale):
     while running:
         x = 50
         for colour in setup:
+            if colour == "mRED":
+                pygame.draw.rect(screen,COLLAR['rgb'], (x, COLLAR['position']['start'], COLLAR['position']['width'], COLLAR['position']['height']))
+                x+=COLLAR['position']['width']+3
+
             for i in range(setup[colour]):
                 pygame.draw.rect(screen, PLATES[colour]['rgb'], (x,PLATES[colour]['position']['start'],PLATES[colour]['position']['width'],PLATES[colour]['position']['height']))
                 x+=PLATES[colour]['position']['width']+3

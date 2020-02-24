@@ -93,28 +93,6 @@ COLLAR = {
         'height':36
 }}
 
-def main():
-    black = (0,0,0)
-    white = (255,255,255)
-
-    (width, height) = (200, 200)
-    screen = pygame.display.set_mode((width, height))
-    screen.fill(black)
-
-    pygame.display.flip()
-
-    running = True
-    while running:
-
-        pygame.draw.rect(screen, white, (50,50,10,100))
-
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                running = False
-        
-        pygame.display.update()
-
-    return
 
 def barload(weight, isMale):
     ''' Take arguments weight and isMale (True for Men's, False for Women's bar) '''
@@ -158,7 +136,6 @@ def generate(weight, isMale):
     setup = barload(weight,isMale)
 
     black = (0,0,0)
-    white = (249,249,249)
 
     (width, height) = (200, 200)
     screen = pygame.Surface((width, height))
@@ -166,6 +143,15 @@ def generate(weight, isMale):
 
     # Starting x position
     x = 50
+
+    # Render grip section
+    pygame.draw.rect(screen, (220,220,220), (0, 97, 44, 6))
+
+    # Render separation piece
+    pygame.draw.rect(screen, (220,220,220), (44, 93, 6, 14))
+
+    # Render outer sleeve
+    # pygame.draw.rect(screen, (128,128,128), (50, 95, 83, 10))
 
     for colour in setup:
         if colour == "mRED":
@@ -179,5 +165,3 @@ def generate(weight, isMale):
     pygame.image.save(screen, "M"+str(weight)+".jpeg")
 
     return
-
-generate(95,True)

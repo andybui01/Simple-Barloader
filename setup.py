@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="simple_barloader", # Replace with your own username
-    version="1.1.0",
+    version="1.1.1",
     author="Andy Bui",
     author_email="andy.bui2001@gmail.com",
     description="Simple barloading graphic generator",

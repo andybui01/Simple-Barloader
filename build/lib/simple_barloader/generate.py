@@ -1,3 +1,5 @@
+import os
+os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = "hide"
 import pygame
 
 ''' PLATES INFO'''
@@ -117,6 +119,9 @@ def barload(weight, isMale):
         loaded = 12.5
     else:
         loaded = 10.0
+
+    if weight < loaded:
+        raise ValueError
 
     loaded = weight - loaded
 
